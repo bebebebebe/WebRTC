@@ -38,7 +38,6 @@ function init() {
 
   senderConnection.onicecandidate = function(e) {
     if (e.candidate !== null) return;
-    console.log(senderConnection.localDescription);
 
     var json = JSON.stringify(senderConnection.localDescription);
     console.log(COPY_MSG);
