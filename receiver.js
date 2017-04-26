@@ -6,8 +6,9 @@ var COPY_MSG = 'Great!, Now, copy, paste, and somehow give the ANSWER_STRING bel
 var MSG_HEADER = 'msg: ';
 var READY_MSG = 'Channel ready. To send a message "hi", type `say("hi")`';
 
-var SIGNALING_INFO = '\n The OFFER_STRING from the sender has info about its ip, which you have now recorded.';
-var SIGNALING_INFO_MORE = '\n You have generated an "answer", which has info including your ip address. By giving it to the sender by some means of your choice, you are playing the role of a "Signaling Server," which sets up connections.\n';
+var SIGNALING_INFO = '\n The OFFER_STRING from the sender has info in Session Description Protocol (SDP) format, including its ip address, which you have now recorded. \nIt also includes some session info, and could have info about whether it is allowing you access to its camera for example.';
+var SIGNALING_INFO_MORE = '\n You have generated an "answer", which has similar info about yourself. By giving it to the sender by some means of your choice, you are playing the role of a "Signaling Server," which sets up connections.\n';
+
 
 console.log(WELCOME_MSG);
 

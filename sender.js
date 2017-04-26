@@ -7,8 +7,8 @@ var GET_ANSWER_MSG = '\n\n When you get an ANSWER_STRING from the receiver, copy
 var READY_MSG = 'Channel ready. To send a message "hi", type `say("hi")`';
 var MSG_HEADER = 'msg:'
 
-var SIGNALING_INFO = '\n You have generated an "offer", which has info including your ip address. By giving it to the receiver by some means of your choice, you are playing the role of a "Signaling Server," which sets up connections.';
-var SIGNALING_INFO_MORE = '\n The receiver will record the info about your ip, and send you some info about how to contact it. \n ';
+var SIGNALING_INFO = '\n You have generated an "offer", which has info in Session Description Protocol (SDP) format, including your ip address. \nIt also includes some session info, and could have info about whether you are allowing access to your camera for example. By giving it to the receiver by some means of your choice, you are playing the role of a "Signaling Server," which sets up connections.';
+var SIGNALING_INFO_MORE = '\n The receiver will record the info you have sent, and send you some similar info about itself. \n ';
 
 console.log(WELCOME_MSG);
 
@@ -38,6 +38,7 @@ function init() {
 
   senderConnection.onicecandidate = function(e) {
     if (e.candidate !== null) return;
+    console.log(senderConnection.localDescription);
 
     var json = JSON.stringify(senderConnection.localDescription);
     console.log(COPY_MSG);
