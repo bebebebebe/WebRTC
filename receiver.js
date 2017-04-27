@@ -1,16 +1,19 @@
 var receiverConnection;
 var receiveChannel;
 
-var WELCOME_MSG = 'Welcome! When you get an OFFER_STRING from a sender, copy and paste it wrapped with init, below, like this: \n `init(OFFER_STRING)`';
-var COPY_MSG = 'Great!, Now, copy, paste, and somehow give the ANSWER_STRING below to the receiver:';
-var MSG_HEADER = 'msg: ';
-var READY_MSG = 'Channel ready. To send a message "hi", type `say("hi")`';
+var WELCOME_MSG = 'Welcome! When you get an OFFER_STRING from a sender, copy and paste it wrapped with init, below, like this: \n init(OFFER_STRING)';
+var COPY_MSG = 'Great!, Now, copy, paste, and somehow give the ANSWER_STRING below to the receiver.';
+var COPY_MSG_MORE = ' If you, in another browser window, are playing the role of sender, just copy the string and head back over to the sender window.' +
+  '\n If someone on a different machine is playing the role of the sender, you will have to send them this string, for instance by email.';
 
-var SIGNALING_INFO = '\n The OFFER_STRING from the sender has info in Session Description Protocol (SDP) format, including its ip address, which you have now recorded. \nIt also includes some session info, and could have info about whether it is allowing you access to its camera for example.';
-var SIGNALING_INFO_MORE = '\n You have generated an "answer", which has similar info about yourself. By giving it to the sender by some means of your choice, you are playing the role of a "Signaling Server," which sets up connections.\n';
+var MSG_HEADER = 'sender: ';
+var READY_MSG = 'Channel ready for browser to browser message passing! To send a message "hi", type \n say("hi")';
+
+var SIGNALING_INFO = '\nThe OFFER_STRING from the sender has info in Session Description Protocol (SDP) format, including its ip address, which you have now recorded. \nIt also includes some session info, and could have info about whether it is allowing you access to its camera for example.';
+var SIGNALING_INFO_MORE = ' You have generated an "answer", which has similar info about yourself. \n By giving it to the sender by some means of your choice, you are playing the role of a "Signaling Server," which sets up connections.\n';
 
 
-console.log(WELCOME_MSG);
+logDir(WELCOME_MSG);
 
 function init(offerString) {
   initReceiver();
@@ -24,22 +27,23 @@ function initReceiver() {
     if (e.candidate !== null) return;
 
     var json = JSON.stringify(receiverConnection.localDescription);
-    console.log(COPY_MSG),
-    console.log(JSON.stringify(json)); // twice stringified for escaping quote convenience on console log
+    logDir(COPY_MSG);
+    logDirDetails(COPY_MSG_MORE);
+    logData(JSON.stringify(json)); // twice stringified for escaping quote convenience on console log
 
-    console.info(SIGNALING_INFO);
-    console.info(SIGNALING_INFO_MORE);
+    logInfo(SIGNALING_INFO);
+    logInfoDetails(SIGNALING_INFO_MORE);
   };
 
   receiverConnection.ondatachannel = function(e) {
     receiveChannel = e.channel;
 
     receiveChannel.onmessage = function(e) {
-      console.log(MSG_HEADER, e.data);
+      logMsg(e.data);
     };
 
     receiveChannel.onopen = function() {
-      console.log(READY_MSG);
+      logDir(READY_MSG);
     }
   }
 }
