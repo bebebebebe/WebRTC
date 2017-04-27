@@ -12,6 +12,8 @@ See <a href='https://github.com/cjb/serverless-webrtc'>this</a> for an interesti
 
 ## To Use
 
+You can clone the repo, and load the files locally, or use the hosted versions linked to below.
+
 One person, the "sender" should load <a href='sender.html'>`sender.html`</a>
 
 Someone else in the same wifi network (or you, in another browser window) should load <a href='receiver.html'>`receiver.html`</a>
